@@ -4,7 +4,7 @@
  * @Date: 2021-09-22 21:06:10
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-09-23 15:00:12
+ * @LastEditTime: 2021-09-23 16:29:55
  * @LastEditors: Harry
 -->
 <template>
@@ -83,7 +83,7 @@ export default {
         const { data: res } = await this.$http.post('/login', this.LoginForm)
         if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
-        console.log(res)
+        // console.log(res)
         window.sessionStorage.setItem('token', res.data.token)
         this.$router.push('/home')
       })

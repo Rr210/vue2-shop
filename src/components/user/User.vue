@@ -4,7 +4,7 @@
  * @Date: 2021-09-23 19:00:48
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-09-25 20:32:46
+ * @LastEditTime: 2021-09-28 21:56:35
  * @LastEditors: Harry
 -->
 <template>
@@ -84,6 +84,7 @@
                 size="mini"
                 icon="el-icon-setting"
                 circle
+                @click="addAssignmentUser(scope.row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -164,6 +165,40 @@
         >
       </span>
     </el-dialog>
+    <el-dialog
+      title="添加分配角色"
+      :visible.sync="addaVisible"
+      width="50%"
+      @close="addassginmentClose"
+    >
+      <el-form
+        :model="addAssignments"
+        :rules="addForm"
+        ref="ruleForma"
+        label-width="60px"
+        class="demo-ruleForm"
+      >
+        <el-row> 当前用户：{{ addAssignments.username }}</el-row>
+        <el-row> 当前角色：{{ addAssignments.role_name }}</el-row>
+        <el-form-item label="用户">
+          <el-select v-model="value" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addaVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateAddAssginment('ruleForma')"
+          >确 定
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -187,16 +222,59 @@ export default {
       dialogVisible: false,
       // 编辑显示隐藏
       editdialogVisible: false,
+      addaVisible: false,
       currentEdit: {},
+      addAssignments: {},
       addForm: formRules,
       // 表示删除用户的提示框
-      deleVisible: false
+      deleVisible: false,
+      options: [],
+      value: ''
     }
   },
   created() {
     this.getUserList()
   },
   methods: {
+    async updateAddAssginment() {
+      if (this.value) {
+        const { data: res } = await this.$http.put(
+          `users/${this.addAssignments.id}/role`,
+          {
+            rid: this.value
+          }
+        )
+        if (res.meta.status === 200) {
+          this.getUserList()
+          this.$message.success(res.meta.msg)
+        } else {
+          this.$message.error(res.meta.msg)
+        }
+      }
+    },
+    addassginmentClose() {
+      this.value = ''
+      this.options = []
+    },
+    // 加入分配决策事件
+    async addAssignmentUser(row) {
+      this.addAssignments = row
+      // console.log(row)
+      // eslint-disable-next-line camelcase
+      const { id, role_name, username } = row
+      this.addAssignments = {
+        id,
+        role_name,
+        username
+      }
+      const { data: res } = await this.$http.get('/roles')
+      if (res.meta.status === 200) {
+        this.rolesLists = res.data
+        this.options = res.data
+        this.$message.success(res.meta.msg)
+      }
+      this.addaVisible = !this.addaVisible
+    },
     // 删除当前的用户
     deleteUser(id) {
       this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
@@ -310,6 +388,14 @@ export default {
     },
     SearchQuery() {
       this.getUserList()
+    },
+    async getRolesLists() {
+      const { data: res } = await this.$http.get('/roles')
+      if (res.meta.status === 200) {
+        this.rolesLists = res.data
+        this.$message.success(res.meta.msg)
+        return res.data
+      }
     }
   }
 }

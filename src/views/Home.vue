@@ -88,7 +88,7 @@ export default {
       const { data: res } = await this.$http.get('/menus')
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.menuLists = res.data
-      console.log(res)
+      // console.log(res)
     },
     pathActive(path) {
       sessionStorage.setItem('ispathActive', path)

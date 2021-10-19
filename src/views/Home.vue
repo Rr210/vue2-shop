@@ -3,7 +3,7 @@
     <el-container class="container-ht">
       <el-header class="header-container">
         <div class="logo-w">
-          <img src="../assets/logo.png" alt="" srcset="" />
+          <!-- <img src="../assets/logo.png" alt="" srcset="" /> -->
           电商管理系统
         </div>
         <el-button class="btn-w" type="info" @click="layout"> 退出 </el-button>

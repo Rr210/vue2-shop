@@ -4,7 +4,7 @@
  * @Date: 2021-09-28 20:52:35
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-09-28 21:57:09
+ * @LastEditTime: 2021-10-19 14:21:05
  * @LastEditors: Harry
 -->
 <template>
@@ -14,14 +14,14 @@
         <el-col :span="8">
           <el-input
             placeholder="请输入内容"
-            v-model="query"
+            v-model="goodsParams.query"
             clearable
             @clear="clearSearchInput"
           >
             <el-button
               slot="append"
               icon="el-icon-search"
-              @click="SearchQuery"
+              @click="getGoodsLists"
             ></el-button>
           </el-input>
         </el-col>
@@ -50,19 +50,19 @@
           </template>
         </el-table-column>
         <el-table-column label="操作">
-          <template slot-scope="scope">
+          <template slot-scope="scope1">
             <el-button
               type="primary"
               icon="el-icon-edit"
               size="mini"
-              @click="editCurrentUser(scope.row.id)"
+              @click="editCurrentUser(scope1.row.goods_id)"
               circle
             ></el-button>
             <el-button
               type="danger"
               size="mini"
               icon="el-icon-delete"
-              @click="deleteUser(scope.row.id)"
+              @click="deleteUser(scope1.row.goods_id)"
               circle
             ></el-button>
           </template>
@@ -143,7 +143,7 @@ export default {
       this.getGoodsLists()
     },
     clearSearchInput() {
-      console.log()
+      this.getGoodsLists()
     },
     async getGoodsLists() {
       const { data: res } = await this.$http.get('goods', {
@@ -166,11 +166,34 @@ export default {
     // 编辑当前的商品信息
     editCurrentUser() {},
     // 删除当前商品
-    deleteUser() {}
-    // 格式化10位字符的时间戳
+    async deleteUser(id) {
+      console.log(typeof id)
+      const res = await this.$confirm(
+        '此操作将永久删除该商品, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      )
+        .then((result) => result)
+        .catch((err) => err)
+      if (res === 'confirm') {
+        const { data: res } = await this.$http.delete(`goods/${id}`)
+        if (res.meta.status === 200) { return this.$message.success(res.meta.message) }
+        this.$message.error(res.meta.message)
+      } else {
+        this.$message.info('取消删除')
+      }
+    }
   }
+  //   // 格式化10位字符的时间戳
 }
 </script>
 
 <style>
+/* a{
+  color:#1caa0f
+} */
 </style>

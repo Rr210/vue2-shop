@@ -7,6 +7,7 @@ import Welcome from '../views/Welcome'
 import Rights from '../components/power/Right'
 import Roles from '../components/power/Roles'
 import Goods from '../components/goods/Goods'
+import Add from '../components/goods/Add'
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,13 +26,15 @@ const routes = [
       { path: '/users', component: User },
       { path: '/rights', component: Rights },
       { path: '/roles', component: Roles },
-      { path: '/goods', component: Goods }
+      { path: '/goods', component: Goods },
+      { path: '/goods/add', component: Add }
     ]
   }
 ]
 const router = new VueRouter({
   routes
 })
+// 路由前置守卫
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') return next()
   const token = sessionStorage.getItem('token')

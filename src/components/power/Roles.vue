@@ -4,7 +4,7 @@
  * @Date: 2021-09-25 21:34:13
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-09-27 11:45:10
+ * @LastEditTime: 2021-10-26 15:31:10
  * @LastEditors: Harry
 -->
 <template>
@@ -325,8 +325,7 @@ export default {
       // console.log(row.id)
       if (row) {
         const { data: res } = await this.$http.get(`roles/${row.id}`)
-        console.log(res)
-        if (res.meta.staus === 200) {
+        if (res.meta.status === 200) {
           this.ruleForm2 = res.data
         }
         this.updateDialogVisible = !this.updateDialogVisible

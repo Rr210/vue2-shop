@@ -4,7 +4,7 @@
  * @Date: 2021-09-28 20:52:35
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-10-19 14:21:05
+ * @LastEditTime: 2021-10-26 22:52:41
  * @LastEditors: Harry
 -->
 <template>
@@ -26,10 +26,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button
-            style="font-size: 12px"
-            type="primary"
-            @click="dialogVisible = true"
+          <el-button style="font-size: 12px" type="primary" @click="addGoods"
             >添加商品
           </el-button>
         </el-col>
@@ -160,6 +157,10 @@ export default {
         this.$message.error(res.meta.msg)
       }
     },
+    // 跳转到添加商品的界面
+    addGoods() {
+      this.$router.push('/goods/add')
+    },
 
     // 根据关键词进行商品的搜索
     SearchQuery() {},
@@ -181,7 +182,9 @@ export default {
         .catch((err) => err)
       if (res === 'confirm') {
         const { data: res } = await this.$http.delete(`goods/${id}`)
-        if (res.meta.status === 200) { return this.$message.success(res.meta.message) }
+        if (res.meta.status === 200) {
+          return this.$message.success(res.meta.message)
+        }
         this.$message.error(res.meta.message)
       } else {
         this.$message.info('取消删除')

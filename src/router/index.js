@@ -8,6 +8,8 @@ import Rights from '../components/power/Right'
 import Roles from '../components/power/Roles'
 import Goods from '../components/goods/Goods'
 import Add from '../components/goods/Add'
+import Order from '../components/order/Order'
+import Params from '../components/goods/Params'
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,7 +29,9 @@ const routes = [
       { path: '/rights', component: Rights },
       { path: '/roles', component: Roles },
       { path: '/goods', component: Goods },
-      { path: '/goods/add', component: Add }
+      { path: '/goods/add', component: Add },
+      { path: '/orders', component: Order },
+      { path: '/params', component: Params }
     ]
   }
 ]

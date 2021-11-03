@@ -4,7 +4,7 @@
  * @Date: 2021-10-20 09:50:44
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-10-26 22:43:29
+ * @LastEditTime: 2021-11-02 09:55:32
  * @LastEditors: Harry
 -->
 <template>
@@ -320,7 +320,7 @@ export default {
           newobj.goods_cat = newobj.goods_cat.join(',')
           const { data: res } = await this.$http.post('goods', newobj)
           // 对静态数据进行处理
-          if (res.meta.status !== 200) {
+          if (res.meta.status !== 201) {
             return this.$message.error(res.meta.msg)
           }
           this.$router.push('/goods')

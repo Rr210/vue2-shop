@@ -11,7 +11,11 @@ import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css'
 import 'element-ui/lib/theme-chalk/index.css'
-
+// main.js
+import filter from './plugin/filter'
+for (const key in filter) { // 一定要放在 new Vue之前
+  Vue.filter(key, filter[key])
+}
 Vue.use(VueQuillEditor)
 // 配置axios
 axios.interceptors.request.use(config => {
@@ -19,6 +23,7 @@ axios.interceptors.request.use(config => {
   return config
 })
 axios.defaults.baseURL = 'https://sapi.mr90.top/api/private/v1/'
+// axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
 Vue.use(element)
 Vue.prototype.$message = element.other.Message
 Vue.prototype.$confirm = element.other.MessageBox.confirm

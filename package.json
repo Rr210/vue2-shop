@@ -6,10 +6,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "gh":"gh-pages -d dist"
+    "gh": "gh-pages -d dist"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-china-area-data": "^5.0.2",
     "element-ui": "^2.15.6",
     "gh-pages": "^3.2.3",
     "less-loader": "^6.0.0",

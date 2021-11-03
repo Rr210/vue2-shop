@@ -4,7 +4,7 @@
  * @Date: 2021-09-22 21:36:25
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-10-26 10:38:42
+ * @LastEditTime: 2021-11-03 09:10:55
  * @LastEditors: Harry
  */
 // 导入自己需要的组件
@@ -24,6 +24,8 @@ import {
   Table,
   TableColumn,
   Row,
+  Timeline,
+  TimelineItem,
   Tabs,
   TabPane,
   Col,
@@ -69,6 +71,8 @@ const element = {
     Vue.use(Tree)
     Vue.use(Switch)
     Vue.use(Table)
+    Vue.use(Timeline)
+    Vue.use(TimelineItem)
     Vue.use(TableColumn)
     Vue.use(Row)
     Vue.use(Col)

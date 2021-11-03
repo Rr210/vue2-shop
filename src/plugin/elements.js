@@ -4,7 +4,7 @@
  * @Date: 2021-09-22 21:36:25
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-11-03 09:10:55
+ * @LastEditTime: 2021-11-03 16:56:48
  * @LastEditors: Harry
  */
 // 导入自己需要的组件
@@ -17,6 +17,7 @@ import {
   Alert,
   Pagination,
   Dialog,
+  Popconfirm,
   Option,
   Tooltip,
   Switch,
@@ -63,6 +64,7 @@ const element = {
     Vue.use(Cascader)
     Vue.use(Select)
     Vue.use(Tooltip)
+    Vue.use(Popconfirm)
     Vue.use(Tag)
     Vue.use(Step)
     Vue.use(Steps)

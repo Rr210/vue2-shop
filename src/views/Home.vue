@@ -34,10 +34,10 @@
                 <span>{{ item.authName }}</span>
               </template>
               <el-menu-item
-                :index="item1.path"
+                :index="'/'+item1.path"
                 v-for="item1 in item.children"
                 :key="item1.id"
-                @click="pathActive(item1.path)"
+                @click="pathActive('/' +item1.path)"
               >
                 <template slot="title">
                   <i class="el-icon-menu"></i>
@@ -92,6 +92,7 @@ export default {
     },
     pathActive(path) {
       sessionStorage.setItem('ispathActive', path)
+      console.log(path)
       this.ispathActive = path
     },
     getPathActive() {

@@ -4,7 +4,7 @@
  * @Date: 2021-10-20 09:50:44
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-11-02 09:55:32
+ * @LastEditTime: 2021-11-03 17:12:02
  * @LastEditors: Harry
 -->
 <template>
@@ -244,6 +244,9 @@ export default {
       },
       editorOption: {}
     }
+  },
+  created() {
+    window.sessionStorage.removeItem('ispathActive')
   },
   mounted() {
     this.getCates()

@@ -4,7 +4,7 @@
  * @Date: 2021-09-28 20:52:35
  * @Url: https://u.mr90.top
  * @github: https://github.com/rr210
- * @LastEditTime: 2021-10-26 22:52:41
+ * @LastEditTime: 2021-11-03 18:14:53
  * @LastEditors: Harry
 -->
 <template>
@@ -159,7 +159,7 @@ export default {
     },
     // 跳转到添加商品的界面
     addGoods() {
-      this.$router.push('/goods/add')
+      this.$router.replace('/goods/add')
     },
 
     // 根据关键词进行商品的搜索
